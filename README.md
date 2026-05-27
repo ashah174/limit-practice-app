@@ -6,11 +6,11 @@ $$\lim_{x \to -1} \sqrt{\frac{x + 1}{x^2 + cx + b}}$$
 
 ## Live app
 
-_Add your Streamlit Community Cloud URL here after deploying._
+https://limit-practice-app-8cc5v2eujxfclekwqfnbdu.streamlit.app
 
 ## GitHub repository
 
-_Add your GitHub repository link here._
+https://github.com/ashah174/limit-practice-app
 
 ---
 
@@ -18,8 +18,8 @@ _Add your GitHub repository link here._
 
 ### 1. Clone the repository
 ```bash
-git clone <your-repo-url>
-cd <your-repo-folder>
+git clone <https://github.com/ashah174/limit-practice-app.git>
+cd <limit-practice-app>
 ```
 
 ### 2. Create a virtual environment
