@@ -14,38 +14,151 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    .block-container { max-width: 680px; padding-top: 2rem; }
-    .limit-display   { text-align: center; margin: 1.8rem 0; }
+
+    .block-container {
+        max-width: 760px;
+        padding-top: 1.4rem;
+        padding-bottom: 2rem;
+    }
+
+    body {
+        background-color: #050816;
+        color: #f8fafc;
+    }
+
+    h1, h2, h3 {
+        color: #f8fafc;
+        letter-spacing: -0.5px;
+        font-weight: 700;
+    }
+
+    .limit-display {
+        text-align: center;
+        margin: 1.8rem 0;
+        padding: 1rem;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+    }
 
     .feedback-correct {
-        color: #1a7f37;
-        font-size: 1.15rem;
+        color: #d1fae5;
+        background: rgba(34,197,94,0.14);
+        border-left: 5px solid #22c55e;
+        padding: 0.9rem 1rem;
+        border-radius: 12px;
+        font-size: 1.05rem;
         font-weight: 600;
-        margin-top: 0.5rem;
+        margin-top: 0.8rem;
     }
+
     .feedback-incorrect {
-        color: #cf222e;
-        font-size: 1.15rem;
+        color: #fee2e2;
+        background: rgba(239,68,68,0.14);
+        border-left: 5px solid #ef4444;
+        padding: 0.9rem 1rem;
+        border-radius: 12px;
+        font-size: 1.05rem;
         font-weight: 600;
-        margin-top: 0.5rem;
+        margin-top: 0.8rem;
     }
+
     .feedback-encourage {
-        color: #7d4e00;
-        font-size: 1rem;
-        margin-top: 0.3rem;
+        color: #fef3c7;
+        background: rgba(250,204,21,0.12);
+        border: 1px solid rgba(250,204,21,0.2);
+        padding: 0.8rem 0.95rem;
+        border-radius: 12px;
+        font-size: 0.98rem;
+        margin-top: 0.45rem;
     }
+
     .step-card {
-        background: #f6f8fa;
-        border: 1px solid #d0d7de;
-        border-radius: 6px;
-        padding: 0.75rem 1rem;
-        margin: 0.5rem 0 0.9rem 0;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 14px;
+        padding: 0.9rem 1.1rem;
+        margin: 0.65rem 0 0.9rem 0;
+        transition: all 0.2s ease;
     }
+
+    .step-card:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 5px 14px rgba(0,0,0,0.22);
+    }
+
+    .stButton > button {
+        width: 100%;
+        border-radius: 14px;
+        border: none;
+        padding: 0.72rem 1rem;
+        font-weight: 600;
+        font-size: 1rem;
+        color: white;
+        background: linear-gradient(
+            135deg,
+            #4f46e5 0%,
+            #7c3aed 100%
+        );
+        transition: all 0.2s ease;
+    }
+
+    .stButton > button:hover {
+        transform: scale(1.015);
+        opacity: 0.96;
+        box-shadow: 0 6px 18px rgba(124,58,237,0.35);
+    }
+
+    .stTextInput input {
+        background: rgba(255,255,255,0.04);
+        color: white;
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.14);
+        padding: 0.7rem;
+        font-size: 1rem;
+    }
+
+    .stTextInput input:focus {
+        border: 1px solid #7c3aed;
+        box-shadow: 0 0 0 1px #7c3aed;
+    }
+
+    .stLatex {
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0.35rem 0 !important;
+        border: none !important;
+    }
+
+    [data-testid="stExpander"] {
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 14px;
+        background: rgba(255,255,255,0.02);
+        overflow: hidden;
+    }
+
+    .streamlit-expanderHeader {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #f8fafc;
+    }
+
+    hr {
+        border: none;
+        height: 1px;
+        background: rgba(255,255,255,0.08);
+        margin: 1rem 0;
+    }
+
+    .element-container {
+        margin-bottom: 0.3rem !important;
+    }
+
     </style>
     """,
     unsafe_allow_html=True,
 )
-
 
 # ─── Problem generation ───────────────────────────────────────────────────────
 def generate_problem() -> dict:
@@ -153,12 +266,12 @@ if st.session_state.submitted:
 
         elif parsed == answer:
             # ── Correct ──────────────────────────────────────────────────────
-            st.session_state.correct = True
             st.markdown(
-                f'<p class="feedback-correct">✓ Correct! '
-                f'The limit is $\\dfrac{{{answer.numerator}}}{{{answer.denominator}}}$. '
-                f'Great work! </p>',
-                unsafe_allow_html=True,
+            '<p class="feedback-correct">✓ Correct! Great work! 🎉</p>',
+            unsafe_allow_html=True,
+            )
+            st.markdown(
+            f'The limit is $\\dfrac{{{answer.numerator}}}{{{answer.denominator}}}$'
             )
 
             # New problem button
