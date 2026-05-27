@@ -18,8 +18,8 @@ https://github.com/ashah174/limit-practice-app
 
 ### 1. Clone the repository
 ```bash
-git clone <https://github.com/ashah174/limit-practice-app.git>
-cd <limit-practice-app>
+git clone https://github.com/ashah174/limit-practice-app.git
+cd limit-practice-app
 ```
 
 ### 2. Create a virtual environment
