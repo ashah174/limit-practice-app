@@ -4,6 +4,7 @@ from fractions import Fraction
 import streamlit as st
 
 # ─── Page config ──────────────────────────────────────────────────────────────
+# Sets the browser tab title, icon, and centers the layout for a clean look
 st.set_page_config(
     page_title="Limit Practice",
     page_icon="📐",
@@ -222,6 +223,8 @@ answer: Fraction = p["answer"]
 st.title("Solve the limit:")
 
 # ─── Limit display ────────────────────────────────────────────────────────────
+# The values of b and c are injected dynamically so the formula reflects
+# whichever problem was generated for this session.
 st.markdown('<div class="limit-display">', unsafe_allow_html=True)
 st.latex(
     r"\lim_{x \to -1} \sqrt{\dfrac{x + 1}{x^2 + "
@@ -242,7 +245,8 @@ with col_input:
     )
 with col_submit:
     submit_clicked = st.button("Submit", type="primary", use_container_width=True)
-
+    
+# When Submit is clicked, mark as submitted and increment the attempt counter
 if submit_clicked:
     st.session_state.submitted = True
     st.session_state.attempts += 1
@@ -319,7 +323,7 @@ if st.session_state.submitted:
         # unparseable input) so it doesn't appear prematurely
         st.markdown("---")
         with st.expander("📖 Show step-by-step solution", expanded=False):
-
+            # Step 1: show that direct substitution fails (0/0)
             st.markdown("**Step 1 — Direct substitution reveals 0/0**")
             st.markdown('<div class="step-card">', unsafe_allow_html=True)
             st.latex(
@@ -332,7 +336,8 @@ if st.session_state.submitted:
                 "$\\frac{0}{0}$ form. We need to simplify before evaluating."
             )
             st.markdown("</div>", unsafe_allow_html=True)
-
+            
+             # Step 2: factor the denominator to expose the shared (x+1) term
             st.markdown("**Step 2 — Factor the denominator**")
             st.markdown('<div class="step-card">', unsafe_allow_html=True)
             st.markdown(
@@ -347,7 +352,8 @@ if st.session_state.submitted:
                 f"Check: $(x+1)(x+{b}) = x^2 + {b+1}x + {b} = x^2 + {c}x + {b}$ ✓"
             )
             st.markdown("</div>", unsafe_allow_html=True)
-
+            
+            # Step 3: cancel (x+1) from numerator and denominator
             st.markdown("**Step 3 — Cancel the common $(x+1)$ factor**")
             st.markdown('<div class="step-card">', unsafe_allow_html=True)
             st.latex(
@@ -356,7 +362,8 @@ if st.session_state.submitted:
                 r"\qquad (x \neq -1)"
             )
             st.markdown("</div>", unsafe_allow_html=True)
-
+            
+            # Step 4: now direct substitution works on the simplified expression
             st.markdown(r"**Step 4 — Evaluate as** $x \to -1$")
             st.markdown('<div class="step-card">', unsafe_allow_html=True)
             inner_val = b - 1  # = a²
@@ -374,7 +381,8 @@ if st.session_state.submitted:
                 r" = " + ans_latex
             )
             st.markdown("</div>", unsafe_allow_html=True)
-
+            
+             # Summary callout at the bottom of the solution
             st.success(
                 f"**Answer: $\\dfrac{{1}}{{{a}}}$** — factor out the shared "
                 f"$(x+1)$, cancel it, then substitute $x = -1$."
